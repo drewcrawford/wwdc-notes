@@ -1,4 +1,9 @@
 #metal 
+```mermaid
+graph TD
+A[CREATIVITY] --> B[Combinatorial]
+A[CREATIVITY] --> C[Exploratory]
+``` 
 
 # Metal frame debugger
 Step through API calls
