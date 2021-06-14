@@ -22,7 +22,7 @@ Time ratio for `UIScrollView` scrolling
 ## App exit reasons
 Reasons for application exit (terminations)
 Foreground and background reasons
-[[Why is my app getting killed?]]
+[[Why is my app getting killed]]
 
 # Diagnostics
 Diagnostics are needed for root cause analysis.

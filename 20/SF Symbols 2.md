@@ -188,7 +188,7 @@ struct ContentView: View {
 }
 ```
 
-[[what's new in swiftui]]
+[[20/what's new in swiftui]]
 
 SFSymbols are now available on the mac.
 

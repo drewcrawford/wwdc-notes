@@ -43,7 +43,7 @@ SwiftUI has a number of new features that work alongside, for ios apps that use 
 * Toolbar support
 * optimized for mac
 
-[[what's new in swiftui]]
+[[20/what's new in swiftui]]
 
 # Application lifecycle
 

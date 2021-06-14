@@ -335,5 +335,5 @@ See our reference documentation?
 * Take advantage of new Swift syntax features
 
 [[Data Essentials in SwiftUI]]
-[[what's new in swift]]
+[[20/what's new in swift]]
 

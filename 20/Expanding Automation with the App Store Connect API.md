@@ -75,7 +75,7 @@ Asset processing is async, you can use get requests to poll status.
 
 ## power/performance
 High-level view of how to acces this data.  We have a whole session devoted to this feature.
-[[Identifying trends with the Power and Performance API]]
+[[Identify Trends with the Power and Performance API]]
 
 `perfPowerMetrics` off the app url.  Need a custom `Accept` header.
 

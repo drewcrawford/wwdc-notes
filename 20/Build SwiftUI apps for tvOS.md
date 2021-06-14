@@ -144,7 +144,7 @@ Not immediately clear to me why focus is not a computed property of the layout, 
 ## Lazy grids
 Arrange child views in a grid
 Grid items can specify layout properties, size, alignment, spacing, etc.
-[[what's new in swiftui]]
+[[20/what's new in swiftui]]
 [[stacks, grids, and outlines in swiftUI]]
 
 ```swift
