@@ -204,7 +204,7 @@ updateColor(button.menu?.selectedElements.first?.title)
 
 In some cases, extra customization may be more appropriate.  `button.preferredBehavioralStyle = .automatic` vs `.pad`.  Very prominent custom buttons.
 
-[[What's new in Mac catalyst]]
+[[20/What's new in Mac catalyst]]
 
 Much of the functionality is built on top of UIMenu
 

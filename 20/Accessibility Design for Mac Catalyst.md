@@ -15,7 +15,7 @@ System settings -> keyboard -> shortcuts -> "Use keyboard navigation to move foc
 myTableView.selectionFollowsFocus = true
 ```
 
-[[What's new in Mac catalyst]]
+[[20/What's new in Mac catalyst]]
 
 ## shortcuts
 For people who use assistive technologies, finding onscreen UIs can become tedioius.  Would be nice to perform actions through a keyboard shorcut.
