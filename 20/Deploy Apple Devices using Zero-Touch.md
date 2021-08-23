@@ -73,7 +73,7 @@ MDM can remotely wipe a mac.  IT can also remote lock.
 * Content caching -> locally caches various apple things
 * Managed apps in macOS
 
-[[What's new in managing apple devices]]
+[[20/What's new in managing apple devices]]
 [[Custom app distribution with Apple Business Manager]]
 
 # Wrap up

@@ -221,6 +221,6 @@ Account information will be automatically synchronized now.
 * Verify domains in ASM/ABM and enable federation
 * Use SCIM to more easily handle account creation, modifications, and deletion
 
-[[What's new in managing apple devices]]
+[[20/What's new in managing apple devices]]
 [[Deploy Apple Devices Using Zero-Touch]]
 [[Introducing Extensible Enterprise SSO]]

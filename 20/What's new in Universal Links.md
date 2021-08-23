@@ -95,7 +95,7 @@ Inconsistent state: app is installed, but associated domains are not available.
 
 Going forward, your associated domains will be getting requests proxied through apple.
 
-[[What's new in managing apple devices]]
+[[20/What's new in managing apple devices]]
 
 Opt into developer mode from Developer Settings in system settings.  Allows any valid certificate to be used, not necessary one in the trust-store.  Self-signed I guess?
 

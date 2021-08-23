@@ -583,7 +583,7 @@ class Person {
 * New button types and custom rounded corners
 * request Redacted billing information
 
-[[What's new in Wallet and Apple Pay]]
+[[20/What's new in Wallet and Apple Pay]]
 
 ## App clips
 Offer an App Clip on your webpages

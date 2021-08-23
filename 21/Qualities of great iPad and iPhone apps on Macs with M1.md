@@ -178,7 +178,7 @@ optional func paymentAuthorizationController(_ controller: PKPaymentAuthorizatio
 	handler: @escaping (PKPaymentRequestMerchantSessionUpdate) -> Void)
 ```
 
-[[What's new in Wallet and Apple Pay]]
+[[20/What's new in Wallet and Apple Pay]]
 
 ## avkit
 * better full screen video

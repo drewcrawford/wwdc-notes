@@ -134,5 +134,5 @@ Remotely driven updates
 * Utilize Feedback Assistant extensively
 * Manage software updates in your organization
 
-[[What's new in managing apple devices]]
+[[20/What's new in managing apple devices]]
 

@@ -26,7 +26,7 @@ New metadata dprovides richer description
  
  # Apple school manager
  
- [[What's new in managing apple devices]]
+ [[20/What's new in managing apple devices]]
  
  [[App distribution - from ad-hoc to enterprise - 19]]
  
