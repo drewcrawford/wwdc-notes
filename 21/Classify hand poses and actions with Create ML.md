@@ -27,7 +27,7 @@ Big Sur, 14+
 * Create ML app and framework
 * Trained models compatible with earlier OS releases
 
-[[Build dynamic iOS apps with Create ML framework]]
+[[Build dynamic iOS apps with the Create ML framework]]
 
 
 # Hand pose classification

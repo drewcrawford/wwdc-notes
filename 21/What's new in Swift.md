@@ -59,7 +59,7 @@ for testGroup in testAccounts.uniquePermutations(ofCount: 0...) {
 let randomGroup = testAccounts.randomSample(count: 5)
 ```
 
-[[Meet the Swift Algorithms and Collections package]]
+[[Meet the Swift Algorithms and Collections packages]]
 
 ## Swift system
 github.com/apple/swift-system

@@ -47,7 +47,7 @@ Siri is incredibly fast.  By processing on-device, Siri can respond faster.
 Apple Neural Engine powers moving more components of Siri on-device
 Use CreateML to train models on-device in iOS
 
-[[Build dynamic iOS apps with Create ML framework]]
+[[Build dynamic iOS apps with the Create ML framework]]
 # transparency and control
 
 Building understandable controls helps build trust with people.
