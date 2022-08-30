@@ -29,7 +29,7 @@ If you use customer feedback, e.x. ratings or recommendations, you may be creati
 * impact authenticity
 
 [[Introducing sign in with apple - 19]]
-[[Get the  Most out of Sign in with Apple]]
+[[Get the Most out of Sign in with Apple]]
 
 Apple 2fa.  Credeintial returned indicates with a high degree of confidence that a user is real and not a bot.  Flag can be checked on the client.
 

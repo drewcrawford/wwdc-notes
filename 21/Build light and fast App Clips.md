@@ -81,7 +81,7 @@ Single image serves as the backing asset for 3 distinct uses.
 
 Ship lower-resolution placeholders with the appclip and use async image to replace them progressively after launch.
 
-[[What's new in SwiftUI]]
+[[21/What's new in SwiftUI]]
 
 
 # App clip invocation
@@ -158,7 +158,7 @@ To see in-development clip surface, see developer settings => Register local exp
 
 Otherwise, you're missing out on great opportunities to test how your clip is invoked.  Try out new features and see builds befor ethey're available in production.
 
-[[What's new in App Clips]]
+[[21/What's new in App Clips]]
 
 * Testing your App Clip's launch experience
 # Unique functionality
@@ -204,7 +204,7 @@ Recent profile ensures that your app and clip have capabilities necessary for va
 * Modernize your project while maintaing quality
 * Incorporate functionality unique to App Clips
 
-[[What's new in App Clips]]
+[[21/What's new in App Clips]]
 
 * https://developer.apple.com/documentation/Xcode/reducing-your-app-s-size
 * https://developer.apple.com/documentation/app_clips/testing_your_app_clip_s_launch_experience

@@ -307,7 +307,7 @@ App developer
 # Layout and SwiftUI
 English vs arabic.  Not only translations are adapted to the languaeg but also the layout.
 
-[[Get it right ... to left]]
+[[Get it right (to left)]]
 
 You'll notice the script in hindi is taller.  System does this automatically, make sure you odn't give elements a fixed height.  Please expect your text to change according to circumstances.
 

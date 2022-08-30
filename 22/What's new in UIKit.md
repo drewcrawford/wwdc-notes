@@ -46,7 +46,7 @@ Mac catalyst: take advantage by seamlessly integrating with no code required.
 * find and replace
 * editing interactiosn
 [[Meet desktop class iPad]]
-[[Build a desktop class iPad app]]
+[[Build a desktop-class iPad app]]
 
 
 # Control enhancements

@@ -32,7 +32,7 @@ overall, 25% faster.
 now have "build timeline" view.  Identify unexpectedly long tasks and bottlenecks.
 
 Learn more, [[Demystify parallelization in Xcode builds]]
-[[Link fast improve build and launch]]
+[[Link fast improve build and launch times]]
 
 30% faster testing
 [[Author fast and reliable tests for Xcode Cloud]]

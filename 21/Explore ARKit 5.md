@@ -180,7 +180,7 @@ Best practices for app clip codes:
 | Restaurant menu | 1 in (2.5cm)                | 1 ft 8 in (50cm)                 |
 | Movie poster    | 5 in (12.5 cm)              | 8 ft 4 in (250cm)                |
 
-[[What's new in App Clips]]
+[[21/What's new in App Clips]]
 [[Build light and fast App Clips]]
 
 # Face tracking
