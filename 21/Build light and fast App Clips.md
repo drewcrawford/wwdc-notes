@@ -91,7 +91,7 @@ Ship lower-resolution placeholders with the appclip and use async image to repla
 
 Registration takes time to propagate to devices.  
 
-[[What's new in appstore connect]]
+[[20/What's new in appstore connect]]
 [[Configure and link your app clips]]
 
 ## Domain validation
@@ -118,7 +118,7 @@ Safari won't display the full appclip card or smart banner if private browsing i
 
 For more information,
 
-[[What's new in appstore connect]]
+[[20/What's new in appstore connect]]
 [[What's new in Universal Links]]
 
 If not fully configured, your website will be offered in Safari.  Usually because an advanced experience has not been created for the URL.  Even if your URL is the same as your website and your experience displays perfectly in safari, it's still necessary to create an advanced experience.

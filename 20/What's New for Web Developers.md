@@ -47,7 +47,7 @@ logo.addEventListener("click", () => {
 
 WebInspector now shows these animations for debugging purposes
 
-[[What's New in Web Inspector]]
+[[20/What's New in Web Inspector]]
 
 ## Resize observer
 * Reports element size changes

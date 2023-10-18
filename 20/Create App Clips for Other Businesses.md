@@ -60,7 +60,7 @@ Save state before moving to a different session.  We don't support multiple wind
 Xcode automatically embeds the app clip in your app
 Upload as a single submission
 
-[[What's new in appstore connect]]
+[[20/What's new in appstore connect]]
 
 
 

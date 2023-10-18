@@ -97,7 +97,7 @@ Export tests.
 
 [[Design for Safari 15]]
 [[Develop advanced web content]]
-[[What's New in Web Inspector]]
+[[20/What's New in Web Inspector]]
 
 * https://developer.apple.com/safari/download/
 * https://developer.apple.com/documentation/safari-release-notes

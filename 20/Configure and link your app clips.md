@@ -105,7 +105,7 @@ Basically, you can register
 * a short URL that covers most cases
 * A specific URL for specific cases
 
-[[What's new in appstore connect]]
+[[20/What's new in appstore connect]]
 [[Design Great App Clips]]
 
 ## Configure the Smart App Banner to open app clip
@@ -118,7 +118,7 @@ Note the `app-id` here shows an app banner on systems < iOS 14.
 # Demo
 
 # TestFlight
-[[What's new in appstore connect]]
+[[20/What's new in appstore connect]]
 
 Can also add test invocation points for app clips.
 Click on "Add App Clip Invocation" and set up title and URL.

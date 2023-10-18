@@ -47,7 +47,7 @@ Identify opportunities to make changes
 * minimizing data collection
 * on-device processing
 * storing data not linked to identity
-[[What's new in Privacy]]
+[[22/What's new in privacy]]
 
 ## Enter responses into ASC
 From your app's page, open the app privacy section.  Asked whether you collect data.  DAta is considered collected when it is transmitted off the device.  Server logs, user profile, or analytics.

@@ -15,7 +15,7 @@ A user's appclip experience starts with appclip card.  Card shows you title, sub
 
 You can create an appclip card in appstore connect.  Specify locations associated with your appclip.  
 
-[[What's new in appstore connect]]
+[[20/What's new in appstore connect]]
 [[Configure and link your app clips]]
 
 You might not have registered any experiences during development.  Sometimes you want to test end-to-end flow.

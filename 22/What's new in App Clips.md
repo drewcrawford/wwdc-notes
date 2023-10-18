@@ -162,7 +162,7 @@ POST /v1/appClipAdvancedExperiences
 ```
 
 [[Automating App Store Connect - 18]]
-[[What's new in appstore connect]]
+[[20/What's new in appstore connect]]
 
 # Wrap up
 * 15mb size limit
