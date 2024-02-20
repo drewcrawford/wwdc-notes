@@ -48,7 +48,7 @@ Ideally no work on MT should take longer than 100ms.
 
 Can also cause hitches.  Lower thresholds apply.
 
-[[Explore UI animation hitches and the render loop]]
+[[UI animation hitches]]
 see docs: app responsiveness.
 
 # Busy main thread hang

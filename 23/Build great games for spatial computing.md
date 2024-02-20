@@ -184,6 +184,6 @@ preparing content with reality composer pro
 [[Build spatial experiences with RealityKit]]
 [[Enhance your xrOS app with RealityKit]]
 [[Explore the USD ecosystem]]
-[[Work with Reality Composer Pro and Xcode]]
+[[Work with Reality Composer Pro content in Xcode]]
 [[Bring your ARZKit app to xrOS]]
 

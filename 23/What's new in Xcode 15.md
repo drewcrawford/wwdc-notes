@@ -293,6 +293,6 @@ Xcode 15 now supports testflight internal testing distribution.  Available to yo
 
 Xcode now bundles common distribution options.  If distributing through ASC, you get desktop notifications about build status.
 
-[[Simplify distribution with Xcode and Xcode cloud]]
+[[Simplify distribution in Xcode and Xcode Cloud]]
 
 Download today!

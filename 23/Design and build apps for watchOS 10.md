@@ -21,7 +21,7 @@ Shape your app’s navigation structure and experience.
 
 Consider the journey
 Smart Stack. Glanceable widgets swing onto the screen in an intelligently ordered stack.  When you design your app, thinks bout which information will make the best Smart Stack widget and design around those experiences.
-[[Design widgets for the Smart Stack on apple watch]]
+[[Design widgets for the Smart Stack on Apple Watch]]
 
 
 
@@ -147,7 +147,7 @@ Presentations now use a full screen thin material.  Gives the wearer additional 
 * use the watchOS 10 refresh to design or redesign your Apple Watch app for clear, focused andtimely interactions
 
 [[Meet watchOS 10]]
-[[Design widgets for the Smart Stack on apple watch]]
+[[Design widgets for the Smart Stack on Apple Watch]]
 [[Update your app for watchOS 10]]
 
 Only possible because of a deep collaboration between design and engineering. Never been a more vibrant platform and never been a better time to design and built your app.

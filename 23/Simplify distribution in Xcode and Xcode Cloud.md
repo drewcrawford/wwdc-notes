@@ -88,3 +88,5 @@ Post-action: notarize.  that's it.
 # Resources
 * https://developer.apple.com/documentation/Xcode/distributing-your-app-for-beta-testing-and-releases
 * https://developer.apple.com/documentation/Xcode/including-notes-for-testers-with-a-beta-release-of-your-app
+
+

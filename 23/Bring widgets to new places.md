@@ -101,7 +101,7 @@ var body: some View {
 }
 ```
 
-see [[Design widgets for the Smart Stack on apple watch]]
+see [[Design widgets for the Smart Stack on Apple Watch]]
 
 some widgets don't have distinct fg content.  In this case, we can add `containerBackgroundRemovable` to false.
 

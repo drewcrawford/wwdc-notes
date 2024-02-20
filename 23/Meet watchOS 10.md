@@ -91,5 +91,5 @@ to design a great app,
 
 [[Design and build apps for watchOS 10]]
 [[Update your app for watchOS 10]]
-[[Design widgets for the Smart Stack on apple watch]]
+[[Design widgets for the Smart Stack on Apple Watch]]
 [[Build widgets for the Smart Stack on Apple Watch]]

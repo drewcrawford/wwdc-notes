@@ -9,7 +9,7 @@ Repeating frames.
 The render loop fails to finish a frame ontime.
 ## The Render Loop
 Continuous process by which touch events are sent, and frames output.
-iPhone/iPad: 60hz: every 16.67ms
+iPhone/iPad: 60hz: *every* 16.67ms
 iPad Pro - 120hz, 8.33ms
 
 Beginning of a frame, VSYNC happens.  Render loop is timed to vsyncs.  
@@ -231,3 +231,5 @@ Avoid `maskToBounds` entirely if you know content will not exceed the bounds.
 * View hierarchy file format
 
 See prior talks.
+
+

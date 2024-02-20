@@ -106,7 +106,7 @@ Interruptions during scorlling are called 'hitches'.
 3.  Layout.  Commit.
 4.  Sent to the render server.  Each frame has a commit deadline.  Depends on refresh rate.
 
-If you take too long, miss the deadline.  [[Explore UI animation hitches and the render loop]]
+If you take too long, miss the deadline.  [[UI animation hitches]]
 
 To avoid these hitches,
 

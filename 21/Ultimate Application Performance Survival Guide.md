@@ -118,7 +118,7 @@ I can strategically mark custom animations and catch hit rate telemetry during t
 
 [[Understand and eliminate hangs from your app]]
 
-[[Explore UI animation hitches and the render loop]]
+[[UI animation hitches]]
 [[Eliminate animation hitches with XCTest]]
 
 ## Disk writes

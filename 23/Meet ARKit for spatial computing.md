@@ -1,6 +1,55 @@
 Discover how you can use ARKit's tracking and scene understanding features to develop a whole new universe of immersive apps and games. Learn how visionOS and ARKit work together to help you create apps that understand a person's surroundings — all while preserving privacy. Explore the latest updates to the ARKit API and follow along as we demonstrate how to take advantage of hand tracking and scene geometry in your apps.
 
-###  Build a new trait collection instance from scratch - 1:51
+Deeply woven into the OS fabric, powering everything from interacting with the window into playing with an immersive game.
+
+New API, new design.  Everything we learned on iOS, plus unique needs of spatial computing.
+
+Truly a magical experience.  Now taht you've seen the demo, let's dive in.
+
+# Overview
+## ARKit for spatial computing
+* availabe in Swift and C
+* Use any combination of features together!
+* Privacy-first design for secure access to data
+
+ARKitSession
+data providers
+anchors
+
+## Anchors
+Position/orientation in the real world.  Unique identifier, trasnform.
+
+Some types of anchors are trackable.  When not being tracked, hide virtual content.
+
+## data provider - 
+
+ARKit feature. Poll/observe data updates.
+
+## Session
+combined set of ARKit features to use together for a particular experience.  Run a session by providing it with data providers.  Once runnning, the providers start receiving data.  Updates arrive asynchronously.
+
+## Privacy
+one of our core values.
+
+data is not sent to client space.  It's sent to ARKit daemon.  Resulting data is carefully curated before being forwarded.
+
+Prerequisites to accessing data.
+
+Apps must enter a Full Space.  ARKit does not send data to shared space app.
+
+| ?               | authorization type |
+| --------------- | ------------------ |
+| world tracking  | ?                  |
+| plane detection | .worldSensing      |
+| scene geometry  | .worldSensing      |
+| Image tracking  | .worldSensing      |
+| hand tracking   | .handTracking      |
+
+
+Using session, can request authorization for kinds of data.  If you od not do this, ARKit will automatically prompt for permission when running the session, if necessary.
+
+Batch all authorization types in a single rqeuest.
+###  Authorization API - 1:51
 ```swift
 session = ARKitSession()
 
@@ -22,6 +71,28 @@ Task {
     }
 }
 ```
+
+
+
+
+# World tracking
+virtual contenti nt he real world.  Tracks device movement in 6dof.  Type of data provider is called `WorldTrackingProvider`.
+
+* add worldanchors for anchoring virtual content
+* automatic persistence of WorldAnchors
+	* There are some cases where persistence is not available
+* get device's pose relative to the app's origin
+
+worldanchor - trackable anchor, initializer takes a transform.  
+
+demo involving world anchors.  Basically, when you press the diigtal crown, we recenter.  World anchored objects do not recenter.
+
+
+## Device pose
+provides the pose of the device relative to the app's origin
+primarily tyargeted at developers doing their own rendering
+Querying for the pose is relatively expensive.  Avoid for simple cases.
+
 
 ###  World Tracking Device Pose Render Struct - 10:20
 ```swift
@@ -81,6 +152,61 @@ void render(struct Renderer *renderer,
 }
 ```
 
+[[Discover Metal for immersive apps]]
+[[Optimize app power and performance for spatial computing]]
+
+# Scene understanding
+
+* plane detection
+* scene geometry
+* image tracking
+
+## plane detection
+
+horizontal/vertical surfaces.  PlaneDetectionProvider.  Each plane is provided as a PlaneAnchor.
+Useful for content placement or low-fidelity physics simulations
+
+alignment, geometry, and semantic classification.  ex wall, floor, window, etc.  we have 3 fail cases "unknown" "undetermined" and "not available".  Unclear waht the difference is
+
+
+## scene geometry
+Mesh geometry provided as MeshAnhors from sceneReconstructionProvider.
+
+Useful for content placement or high-fidelity physics simulations
+
+vertices, normals, faces, classifications (per face)
+variety of types of objects.  fail case is 'none'
+## image tracking
+detect 2d images in the real world.  ImageTrackingProvider.
+* specify a set of ReferenceImages to detect
+
+load from ARResourceGroup, or provide via CVPixelBuffer or CGImage.
+specify a set of `ReferenceImages` to detect
+Detected images are ImageAnchors
+useful for placing content at known, statically placed images
+
+estimatedScaleFactor, reference image
+# Hand tracking
+anchors containing skeletal data for each of your hands.  
+HandTrackingProvider
+* each  hand is a HandAnchor
+* trackable
+* skeleton
+* chirality (left, right)
+* transform: wrist's transform relative to app origin
+
+skeletons have joints queried by name.  parentJOint, name, localTransform, rootTransform, isTracked.
+
+26 joints in hand skeleton.
+
+wrist - root joint for the hand.  For each finger, each joint is parented to the wrist.  Subsequent joints are parented to the previous joint.
+
+Useful for content placement or detecting custom gestures
+
+poll for latest HandAnchors or receive HandAnchors when updates are available.
+
+
+
 ###  Hand tracking joints - 16:00
 ```swift
 @available(xrOS 1.0, *)
@@ -133,6 +259,8 @@ void renderer_init(struct Renderer *renderer) {
 }
 ```
 
+
+
 ###  Hand tracking call in render function - 17:25
 ```swift
 void render(struct Renderer *renderer,
@@ -154,6 +282,10 @@ void render(struct Renderer *renderer,
 }
 ```
 
+
+# Example
+
+## app and view model
 ###  Demo app TimeForCube - 18:00
 ```swift
 @main
@@ -211,6 +343,11 @@ struct TimeForCube: App {
 }
 ```
 
+## session initialization
+
+
+
+## hand colliders
 ###  HandTrackingProvider function - 20:00
 ```swift
 class TimeForCubeViewModel: ObservableObject {
@@ -238,6 +375,12 @@ class TimeForCubeViewModel: ObservableObject {
             fingerEntities[handAnchor.chirality]?.setTransformMatrix(originFromIndex,             relativeTo: nil)
         }
 ```
+
+hand occlusion - see your hands on top of virtual content.  `.upperlimbVisibility(.hidden)`.  Now we see the entire sphere regardless of where our hands are.
+
+
+## scene colliders
+
 
 ###  SceneReconstruction function - 21:20
 ```swift
@@ -271,6 +414,17 @@ func processReconstructionUpdates() async {
     }
 ```
 
+iterate over anchorUpdates.  Generat a shape resource and then switch on the anchor updates event.  If we're adding an chor, we create a new entity, set transform, add collision/physics body, add input target component, etc.
+
+Add a new entity to our map, as a child of our content entity.
+
+To update, we retrieve from map and update its transform/collision components shape.
+
+removal - we remove the entity.
+## cubes
+
+
+
 ###  Add cube at tap location - 22:20
 ```swift
 class TimeForCubeViewModel: ObservableObject {
@@ -295,3 +449,7 @@ class TimeForCubeViewModel: ObservableObject {
         contentEntity.addChild(entity)
     }
 }```
+
+# Leanr more
+[[Build spatial experiences with RealityKit]]
+[[Evolve your ARKit app for spatial experiences]]
