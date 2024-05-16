@@ -1,4 +1,18 @@
 Swift Charts has come full circle: Get ready to bake up pie and donut charts in your app with the latest improvements to the framework. Learn how to make your charts scrollable, explore the chart selection API for revealing additional details in your data, and find out how enabling additional interactivity can make your charts even more delightful.
+
+# Pie charts
+
+Delicious, beautiful pie charts.  Show how a total value is made up of categories.
+
+* casual
+* Intuitive
+* Approachable
+mark-based composition syntax
+
+New mark: SectorMark.
+
+Represents a slice in the pie. Positioned in polar space.  Size proportional to value.
+
 ###  Stacked bar chart - 2:06
 ```swift
 Chart(data, id: \.name) { element in
@@ -21,6 +35,7 @@ Chart(data, id: \.name) { element in
 }
 ```
 
+
 ###  Pie chart with angular inset - 3:05
 ```swift
 Chart(data, id: \.name) { element in
@@ -31,6 +46,9 @@ Chart(data, id: \.name) { element in
   .foregroundStyle(by: .value("Name", element.name))
 }
 ```
+
+create a gap between sectors.
+
 
 ###  Pie chart with corner radius - 3:06
 ```swift
@@ -83,6 +101,14 @@ Chart(data, id: \.name) { element in
   }
 }
 ```
+
+Great way to make impression with data. 
+# Selection
+Interactivity encourages people to explore data naturally.  Input, touch, etc.
+
+Driect way for you to communicate with a chart.  
+
+Visualize average sales.  Detailed sales number via popover.
 
 ###  Chart visualizing average sales by city - 5:14
 ```swift
@@ -219,6 +245,9 @@ Chart {
 .chartXSelection(value: $rawSelectedDate)
 ```
 
+Can select ranges.  on iOS, we use two-finger tap.  macOS, drag gesture.
+
+ChartProxy can select value.
 ###  Range selection - 7:07
 ```swift
 Chart(data) { series in
@@ -233,6 +262,7 @@ Chart(data) { series in
 .chartXSelection(value: $rawSelectedDate)
 .chartXSelection(range: $rawSelectedRange)
 ```
+
 
 ###  Overriding default selection gesture - 7:22
 ```swift
@@ -253,6 +283,7 @@ Chart(data) { series in
 }
 ```
 
+
 ###  Selection in pie charts and donut charts - 7:31
 ```swift
 Chart(data, id: \.name) { element in
@@ -267,6 +298,8 @@ Chart(data, id: \.name) { element in
 }
 .chartAngleSelection(value: $selectedAngle)
 ```
+
+# Scrolling
 
 ###  Daily sales chart - 7:54
 ```swift
@@ -295,6 +328,9 @@ Chart {
 .chartScrollableAxes(.horizontal)
 ```
 
+
+scrollTargetBehavior - align scroll view content with values.  Here is snappable behavior
+
 ###  Setting the visible domain for a scrollable chart - 8:11
 ```swift
 Chart {
@@ -309,6 +345,8 @@ Chart {
 .chartScrollableAxes(.horizontal)
 .chartXVisibleDomain(length: 3600 * 24 * 30)
 ```
+
+[[Beyond scroll views]]
 
 ###  Chart scroll position - 8:18
 ```swift
@@ -345,6 +383,11 @@ Chart {
     matching: DateComponents(hour: 0),
     majorAlignment: .matching(DateComponents(day: 1))))
 ```
+
+# Wrap up
+* pie charts
+* selection
+* scrolling
 
 
 # Resources

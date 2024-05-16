@@ -13,7 +13,7 @@ Completely new loupe, to make it easy to place the cursor in large bodies of tex
 * Works with `UITextView` and `UITextField`.  Also `UITextInteraction`.
 If you have a customized UI, it can be challenging to keep up with changes.
 
-We have a new UITextSelectionDisplayInteraction, which just provides the display.
+We have a new UITextSelectionDisplayInteraction, which just provides the display without the gestures of the other things.
 
 ## UITextSelectionDisplayInteraction
 * `UIInteraction` to be installed on any UIView
@@ -32,12 +32,12 @@ use a gesture recognizer to drive loupe updates.
 
 
 # Text item actions and menus
-Text item interactions in UITextview are now more customizable with new APIs on UITextView delegate.  make it possible ot modify the primary action for text items.  Candidate menu shown here.
+Text item interactions in UITextview are now more customizable with new APIs on UITextView delegate.  make it possible to modify the primary action for text items.  Candidate menu shown here.
 
-previously, UITextView allows developers to disable item inteeractions through `shouldInteractWith` APIs.  
+previously, UITextView allows developers to disable item interactions through `shouldInteractWith` APIs.  
 
 * customize the primary action or menu content
-* new methods on `UITexxtViewDelegate`.
+* new methods on `UITextViewDelegate`.
 
 ## text items
 represent the content that supports item interaction.
@@ -52,11 +52,16 @@ ex, add custom menus to parts of the text.  To continue to suppress or disable t
 * supports several different kinds of bullets
 * automatic number of items
 * Localized for every language
+* 
 
 # Dictation
 New UI.
 
-## NSTextIntertionIndicator
+After scrolling, we draw a cursor arrow pointing to offscreen position.
+
+
+
+## NSTextInsertionIndicator
 For macOS.  Remain consistent with the system selection UI.
 * system-provided insertion point
 * customizable
@@ -64,6 +69,9 @@ For macOS.  Remain consistent with the system selection UI.
 * Supports dictation effects
 
 can disable the glow effect.  
+
+basically this is an NSView we insert into the hierarchy.
+
 
 Adopt `NSTextInputClient` `selectionRect` and `documentVisibleRect` properties.
 notify scrolling beginning and ending.  
@@ -85,7 +93,7 @@ Use `clipsToBounds=false`.  Usually we can expand outside the textview.  UIKit h
 Respond to changes in vertical height
 
 ## Wrapping and hyphenation
-Improvedl ine breaking for chinese, german, japanes, and korean
+Improved line breaking for chinese, german, japanese, and korean
 Optimized for text style and language
 adopt text styles
 

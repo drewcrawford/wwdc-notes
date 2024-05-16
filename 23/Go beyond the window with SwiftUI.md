@@ -1,4 +1,22 @@
 Get ready to launch into space — a new SwiftUI scene type that can help you make great immersive experiences for visionOS. We'll show you how to create a new scene with ImmersiveSpace, place 3D content, and integrate RealityView. Explore how you can use the immersionStyle scene modifier to increase the level of immersion in an app and learn best practices for managing spaces, adding virtual hands with ARKit, adding support for SharePlay, and building an "out of this world" experience!
+
+ARKit.
+
+Immersive experiences.  In these experiences, your application displays UI, including windows and three-dimensional content anywhere around you.  Surroundings remain visible, and become part of the experience.
+
+Anchor elements of your app to surfaces and augment the real world, etc.
+
+
+[[Take SwiftUI to the next dimension]]
+
+This year we've added the third dimension to swiftUI.  Windows and volumes on xrOS and display 3d ui elements with easy to use declarative patterns of swiftui.  Both windows and volumes let you display content within their bounds.
+
+How to create a truly immersive experience?  Beyodn the window's bounds, all around your head, etc.  
+
+Spaces are a kind of container to present your user interface on xrOS
+
+# Get started with Space
+
 ### 4:18 - Defining an ImmersiveSpace
 ```swift
 @main
@@ -11,6 +29,17 @@ struct WorldApp: App {
 }
 ```
 
+Only one space open at a time.
+
+Place view hierarchy in body of scene.  By placing this in immersivespace, rendered without clipping boundaries.
+
+When you display immersive space, you enter the full space.  All other apps will go away.  To make room for your content to appear.
+
+
+
+# Display content
+
+
 ### 6:53 - RealityView in an ImmersiveSpace
 ```swift
 ImmersiveSpace {
@@ -20,6 +49,19 @@ ImmersiveSpace {
     }
 }
 ```
+
+We encourage you to use ImmersiveSpace together with RealityView.  Immersive space and RealityView work hand in hand, and provide all features you need for great immersive experiences.
+
+ex, builtin support for asynchronous loading of assets.  
+
+* asynchronous loading
+* ARKit anchor-based placement
+* Use of hands and head-pose data
+
+In SwiftUI, y-axis is downwards, z-axis is towards you.  
+In RK, y-axis points upwards.
+
+[[Build spatial experiences with RealityKit]]
 
 ### 8:17 - ImmersiveSpace with a SolarSystem view
 ```swift
@@ -32,6 +74,8 @@ struct WorldApp: App {
     }
 }
 ```
+
+we use id later to open the space.
 
 ### 9:00 - LaunchWindow
 ```swift
@@ -73,6 +117,13 @@ struct SpaceControl: View {
 }
 ```
 
+Use these actions when button is invoked.  When opening the space, we pass in id from earlier.  Only one space can be open at a time, dismiss doesn't need any argument.
+
+System animates in and out with a certain duration.  These actions are async so that you can react.
+
+Opening may fail, it tells you whether it failed/succeeded.
+
+
 ### 10:44 - WorldApp using LaunchWindow and ImmersiveSpace
 ```swift
 @main
@@ -85,6 +136,8 @@ struct WorldApp: App {
     }
 }
 ```
+
+Keep in mind, it may take time for your assets to be fully loaded and ready to be rendered.  Make sure to leverage new Model3D and RealityView APIs which load your 3d assets asynchronously.
 
 ### 11:32 - Model3D with phase handling
 ```swift
@@ -99,6 +152,15 @@ Model3D(named: "Earth") { phase in
     }
 }
 ```
+
+# Managing your Space
+* scene phases
+* coordinate conversions
+* immersion styles
+
+we may leave the space involuntarily, e.g. alerts.  "inactive phase".
+
+
 
 ### 13:04 - Scene Phases
 ```swift
@@ -120,6 +182,10 @@ struct WorldApp: App {
     }
 }
 ```
+
+Makes handling these transitions easy and convenient!
+
+Coordinate conversion.  To position model next to window, need to know window position in coordinate system.
 
 ### 14:21 - Coordinate Conversions
 ```swift
@@ -143,6 +209,18 @@ var body: some View {
     }
 }
 ```
+
+Using this transform we do the conversion!
+
+[[Build spatial SharePlay experiences]]
+
+## Immersion styles
+
+* Mixed
+* Progressive
+* Full
+
+
 
 ### 16:34 - Immersion Styles
 ```swift
@@ -169,6 +247,19 @@ struct WorldApp: App {
    }
 }
 ```
+
+progressive -> controlled by digital crown?
+
+
+
+# Customization
+
+
+Our app allows us to open a space with a button, but what about on launch?
+
+In order to launch directly to an immersive space, need to configure scene manifest.  
+
+Surrounding effects, space passthrough.  Surroundings can be dimmed.  We set the `preferredSurroundingEffects` to be dark, so our surroundings are automatically dimmed.  Since no passthrough is available.
 
 ### 20:08 - Surrounding Effects
 ```swift
@@ -199,6 +290,8 @@ struct WorldApp: App {
     }
 }
 ```
+
+can show virtual hands instead.
 
 ### 20:52 - Hand Anchoring
 ```swift
@@ -256,6 +349,15 @@ struct SpaceGloves2: View {
     }
 }
 ```
+
+For more details
+
+[[Evolve your ARKit app for spatial experiences]]
+
+
+* create immersive experiences effortlessly
+* style your space with unique presentations
+* multiple options for customization!
 
 
 # Resources

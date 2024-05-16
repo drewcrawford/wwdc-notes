@@ -1,5 +1,13 @@
 Bring the latest advancements in Speech Synthesis to your apps. Learn how you can integrate your custom speech synthesizer and voices into iOS and macOS. We'll show you how SSML is used to generate expressive speech synthesis, and explore how Personal Voice can enable your augmentative and assistive communication app to speak on a person's behalf in an authentic way.
 
+
+Voices can be personal.
+
+# Explore Speech Synthesis Markup Language
+
+W3C standard for speech
+Declarative XML document
+Supported on all Apple platforms
 ### 2:10 - SSML phrase
 ```html
 <speak>
@@ -8,6 +16,8 @@ Bring the latest advancements in Speech Synthesis to your apps. Learn how you ca
     <prosody rate="200%">nice to meet you!</prosody>
 </speak>
 ```
+
+
 
 ### 2:29 - SSML utterance
 ```swift
@@ -25,6 +35,16 @@ guard let ssmlUtterance = AVSpeechUtterance(ssmlRepresentation: ssml) else {
 
 self.synthesizer.speak(ssmlUtterance)
 ```
+
+
+# Implement a synthesis provider
+Synthesizer with great new voices.  iOS, macOS, iPadOS.  Speech synthesis providers allow you to implement your own speech synthesizer/voice.
+
+Extension responsible for rendering audio to the SSML input, and optionally returning markers of when words occur.  System manages playback.
+
+
+4-character identifier for app, 4-character identifier for vendor.
+
 
 ### 4:33 - Create a host app
 ```swift
@@ -54,6 +74,7 @@ struct ContentView: View {
     }   
 }
 ```
+
 
 ### 5:04 - Keep track of purchased voices
 ```swift
@@ -102,6 +123,12 @@ struct ContentView: View {
     }
 }
 ```
+
+`updateSpeechVoices` signals voices have changed.  System voice list will be rebuilt.
+
+We can make this call after completing an IAP.
+
+Keep tabs on which voices are available.
 
 ### 5:39 - Update UI with purchased voices
 ```swift
@@ -156,6 +183,12 @@ struct ContentView: View {
 }
 ```
 
+an app group allows us to share this voice group between app/extension.
+
+Suite name - ensures host app and extension read from the same domain.
+
+`AVSpeechSynthesizer` has new API to listen for change in system voices.  User can delete/download voices.  Subscribe to `availableVoicesDidChangeNotification`.
+
 ### 6:25 - Monitor for system voice changes
 ```swift
 struct ContentView: View {
@@ -179,6 +212,12 @@ struct ContentView: View {
     }
 }
 ```
+
+Inform the system of what voices we provide.  override `speechVoices` getter to provide a list of voices.  
+
+For each item, we'll construct US english, AVSpeechSynthesisProvider Voice.
+
+
 
 ### 6:53 - Override speechVoices getter
 ```swift
@@ -208,6 +247,7 @@ public class WWDCSynthAudioUnit: AVSpeechSynthesisProviderAudioUnit {
 }
 ```
 
+
 ### 7:22 - Use your synthesis engine on each synthesis request
 ```swift
 public class WWDCSynthAudioUnit: AVSpeechSynthesisProviderAudioUnit {
@@ -217,6 +257,8 @@ public class WWDCSynthAudioUnit: AVSpeechSynthesisProviderAudioUnit {
     }
 }
 ```
+
+
 
 ### 8:14 - Handle request cancellation
 ```swift
@@ -231,6 +273,8 @@ public class WWDCSynthAudioUnit: AVSpeechSynthesisProviderAudioUnit {
     }
 }
 ```
+
+audiounit fills the number of frames.
 
 ### 8:28 - Override internalRenderBlock
 ```swift
@@ -277,6 +321,18 @@ public class WWDCSynthAudioUnit: AVSpeechSynthesisProviderAudioUnit {
 }
 ```
 
+we set it to complete when we're done.  Signals to the system that rendering has completed and no more buffers to be rendered.
+# Use Personal Voice
+
+Record/recreate voice on iOS/macOS.  Personal voice generated on device, not on a server.  Voice will appear amongst rest of system voices.
+
+Live speech - iOS, iPadOS, macOS, watchOS.
+
+Type to speak on the fly.
+
+Request access with these voices, using new auth API.  Use of personal voice is sensitive and should be primarily used for augmentative or alternative communication apps.
+
+
 ### 11:10 - Request authorization for Personal Voice
 ```swift
 struct ContentView: View {
@@ -293,6 +349,9 @@ struct ContentView: View {
 }
 ```
 
+Now that i have access to personal voice, I can use it to speak with.
+
+
 ### 11:34 - Use Personal Voice
 ```swift
 func speakUtterance(string: String) {
@@ -303,6 +362,13 @@ func speakUtterance(string: String) {
     }
 }
 ```
+
+# Next steps
+Utilize SSML to create a rich speech experience
+
+Implement unique voices to expand users' voice options
+Bring a personal touch to your apps with personal voice.
+
 
 # Resources
 * https://developer.apple.com/documentation/audiounit

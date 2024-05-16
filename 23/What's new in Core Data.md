@@ -1,5 +1,21 @@
 Elevate your app's data persistence with improvements in Core Data. Learn how you can use composite attributes to create more intuitive data models. We'll also show you how to migrate your schema through disruptive changes, when to defer intense migrations, and how to avoid overhead on a person's device. To get the most out of this session, you should be familiar with handling different data types in Core Data as well as the basics of lightweight migration.
 
+# Composite attributes
+New type of attribute.  Encapsulates complex or custom data types.
+Composed of built-in core data datatypes
+Nesting Composite attributes is supported
+
+Alternative to transformable type attributes.  Allow NSfetchRequests with NSPredicate configured with composite attribute namespaces keypath
+
+Encapsulate flattened attributes.
+Improve fetch performance by prefetching a relationship?  Effect of embedding composite attribute is it prevents faulting the remote entity.
+
+NScompositeAttributedescription.
+Attribute type is NSCompositeAttributeType.
+`.elements` array contains the attributes
+Must only contain `NSAttributeDescription`.  
+
+
 ###  5:39 - Adding a composite attribute
 ```swift
 enum PaintColor: String, CaseIterable, Identifiable {
@@ -68,6 +84,68 @@ private func findAircraft(with color: String) {
     }
 }
 ```
+
+I guess a lot of this is stringly typed?
+
+# Stage your migrations
+
+Lightweight migration is the preferred fmethod of migration
+Updates data storage to be in sync with data model
+coredata has built-in migration tools
+
+[[Evolve your Core Data Schema]]
+
+Try a staged migration if you exceed lightweight migration
+* migrate models with non-conforming lightweight changes
+* simplify your app
+* give your app execution control during migration
+
+1.  identify models with non-conforming changes
+2.  decompose the changes into stages
+3. describe a total ordering of models to Core Data
+4. have CD perform the migration
+
+Manually review schema changes?
+open the store with the lightweight migration options set?
+`NSMIgratePersistentStoresAutomatically` and `NSInferMappingModelAutomaticallyOption`.  If they're not lightweight-eligible, you'll receive an error.
+
+can use `NSMappingModel.inferredMappingModel(forSourceModel:destinationModel:)`, inferred model or nil.
+
+basically we introduce new steps to make it migratable.  Series of migrations where ach model is migratable but equivalent to non-conforming migration.
+
+so we copy data from aircraft entity into new flightdata entity, and relate those to the aircraft, kinda like an attachment paradigm.
+
+in modelv3, old flightData attribute is deleted from the old entity.
+
+each step is within the capabilities of lightweight migration.  To describe total orderin of models, we have these classes
+`NSStagedMigrationManager`
+`NSCustoMigrationStage`
+`NSLIghtweightMigrationStage`
+`NSManagedObjectModelReference`
+
+manager -> manages and applies the stages as a total ordering
+manages the event loop
+provides access to the migrating store via NSPersistentContainer.
+added with NSPersistentStoreStagedMigrationManagerOptionKey.
+
+form the basis for moving between models.
+Create a migration stage for each model change
+
+NSLightweightMigrationStage -> don't require decomposition, lightweight eligible
+hopefully the majority of your models
+supplement the total ordering of models.
+include all versions
+
+each decomposed version of model uses NSCustomMigrationStage.  And contain a source model reference and a destination model reference.
+Optional `willMigrateHandler` and `didMigrateHandler`
+
+stage migrations make use of NSManagedObjectMOdelReference.
+Promise of NSManagedObjectModel.  CD will full this promise.
+Initialize with version checksum.
+Checksum can be obtained using versionChecksum() method.
+Output in the xcode build log under 'compile data model'.  Search for 'version checksum'
+contained in the `VersionInfo.plist` for models.
+
 
 ###  16:00 - Creating managed object model references for staged migration
 ```swift
@@ -141,6 +219,8 @@ customStage.willMigrateHandler = { migrationManager, currentStage in
 }
 ```
 
+"It's possible that the aircraft class may not exist during the migration" ??
+
 ###  17:41 - Loading the persistent stores with an NSStagedMigrationManager
 ```swift
 let migrationStages = [lightweightStage, customStage]
@@ -164,6 +244,34 @@ persistentContainer?.loadPersistentStores { storeDescription, error in
     }
 }
 ```
+
+persistent stores are loaded to affect migration process.  CD automatically apply required stages and migrate store schema.
+
+# Defer your migrations
+some migrations require additional runtime that you can't do in fg.
+migration can take time
+Long migrations can frustrate users.
+defer some work during lightweight migration tasks
+during lightweight migration, if an entity has a migration transformation requiring cleanup, such as updating indices or dropping column, table transformation can be delayed until you deem that the resources are available.
+
+Still synchronous and occurs normally, only the cleanup of schema is preferred.
+
+`NSPersistentStoreDeferredLightweightMigrationOptionKey`.
+
+backwards compatible with macOS big sur and iOS 14
+
+only available for sqlite store types!
+
+examples
+* removing attributes or relationships
+* changing relationships where an entity hierarchy no longer exists
+* changing relationships from ordered to non-ordered
+
+check persistent store's metadata.  If it contains the key, that is a signal to you that there is deferred work tbd.
+Can use `finishDeferredLightweightMigration` to finish.
+
+
+
 
 ###  21:01 - Adding a persistent store with NSPersistentStoreDeferredLightweightMigrationOptionKey option
 ```swift
@@ -189,6 +297,18 @@ if (metadata[NSPersistentStoreDeferredLightweightMigrationOptionKey] == true) {
     coordinator.finishDeferredLightweightMigration()
 }
 ```
+
+consider using background task api to schedule completion.  BGProcessingTask.
+
+consider designing stages that take advantage of both api's capabilities.
+
+# Wrap up
+* wrap data types with composite attributes
+* stage complex model migrations
+* improve app performance with deferred migrations
+
+[[Evolve your Core Data Schema]]
+
 # Resources
 * https://developer.apple.com/documentation/coredata
 * https://developer.apple.com/documentation/coredata/migrating_your_data_model_automatically
