@@ -187,7 +187,7 @@ Total prediction time of amodel is a function of its architecture as well as the
 
 Experiment with the model architecture and explore some alternatives that are faster.  But changing the architecture means I need to retrain the network.  Since the original model was developed in pytorch, I decided to use pytorch on metal to retrain.
 
-[[Accelerate machine learning with Metal]]
+[[22/Accelerate machine learning with Metal]]
 
 After retraining, I need to re-convert and re-verify.  
 

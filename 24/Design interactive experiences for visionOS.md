@@ -1,0 +1,2 @@
+Learn how you can design a compelling interactive narrative experience for Apple Vision Pro from the designers of Encounter Dinosaurs. Discover how these types of experiences differ from existing apps, media, and games, and explore how to design narratives that bring audiences into new worlds. Find out how you can create stories that adapt to any space and size, provide multiple levels of interaction to make them accessible to all, and use animation, spatial audio, and custom gestures to further immerse people in your experience.
+

@@ -1,0 +1,1 @@
+App Intents power system experiences in controls, Spotlight, Siri, and more. Find out how to identify the functionality that's best for App Intents, and how to use parameters to make these intents flexible. Learn how to use App Intents to allow people to take action outside your app, and see examples of when to navigate into your app to show contextual information.

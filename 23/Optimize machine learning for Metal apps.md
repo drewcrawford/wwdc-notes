@@ -10,7 +10,7 @@ TesnorFlow
 PyTorch
 
 [[Build customized ML models with the Metal Performance Shaders Graph]]
-[[Accelerate machine learning with Metal]]
+[[22/Accelerate machine learning with Metal]]
 
 # PyTorch and TensorFlow updates
 
@@ -35,7 +35,7 @@ fallbacks to cpu
 
 Metal System Trace, part of Instruments
 
-[[Accelerate machine learning with Metal]]
+[[22/Accelerate machine learning with Metal]]
 
 discussion of how to accelerate custom ops.
 1.  Implement in c++

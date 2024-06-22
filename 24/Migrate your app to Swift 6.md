@@ -1,4 +1,23 @@
 Experience Swift 6 migration in action as we update an existing sample app. Learn how to migrate incrementally, module by module, and how the compiler helps you identify code that's at risk of data races. Discover different techniques for ensuring clear isolation boundaries and eliminating concurrent access to shared mutable state.
+
+By adopting swift concurrency we went from an ad-hoc concurrency architecture to something actually organized.
+
+Reference types allow shared mutable state to be passed around.
+
+Useful if: You're experiencing hard-to-reproduce crashes.
+You're integrating more concurrency into your app
+You're maintaining a library that is used from concurrent code
+
+swiftpackageindex.com
+
+1.  Enable complete concurrency checking
+2. Enable Swift 6
+3. Next target
+4. Audit unsafe opt-outs
+
+Resist the temptation to blend both refactoring and enabling data race safety.
+
+
 ###  9:08 - Recaffeinater and CaffeineThresholdDelegate
 ```swift
 //Define Recaffeinator class
@@ -99,6 +118,11 @@ let logger = Logger(
 )
 ```
 
+When does the initializer get run?  They're initialized lazily.  The value is initialized on first use.  Important difference vs C/ObjC.  They're initialized on startup, which is bad for launch time.  Swift's lazy initialization avoids these problems.  But this can introduce data races.  What if two threads try to log at the same time?
+
+In Swift, global variables are guaranteed to be created atomically.  Only one will initialize while the other will block.
+
+
 ###  17:03 - scheduleBackgroundRefreshTasks() has two warnings
 ```swift
 func scheduleBackgroundRefreshTasks() {
@@ -156,6 +180,9 @@ func scheduleBackgroundRefreshTasks() {
 }
 ```
 
+Some callbacks have a guarantee.  They might say in their documentation.  Some delegates make no guarantee.  Puts a lot of burden on you the user to do the right thing.  Or can change over time.
+
+
 ###  22:15 - Revisiting the Recaffeinater
 ```swift
 //This class is guaranteed on the main actor...
@@ -174,6 +201,8 @@ extension Recaffeinater: CaffeineThresholdDelegate {
     }
 }
 ```
+
+
 
 ###  22:26 - Option 1: Mark function as nonisolated
 ```swift
@@ -197,6 +226,8 @@ nonisolated public func caffeineLevel(at level: Double) {
 }
 ```
 
+
+
 ###  23:34 - Option 1c: Explore options to update the protocol
 ```swift
 public protocol CaffeineThresholdDelegate: AnyObject {
@@ -215,6 +246,10 @@ nonisolated public func caffeineLevel(at level: Double) {
 }
 ```
 
+assumeIsolated asserts, and traps that we're on the main actor.  Better than a race condition that could corrupt the user's data.
+
+
+
 ###  25:21 - `@preconcurrency` as a shorthand for assumeIsolated
 ```swift
 extension Recaffeinater: @preconcurrency CaffeineThresholdDelegate {
@@ -226,6 +261,9 @@ extension Recaffeinater: @preconcurrency CaffeineThresholdDelegate {
 }
 ```
 
+Assumes it's being called on the actor the view is isolated to, and will trap if it isn't.
+
+
 ###  26:42 - Add `@MainActor` to the delegate protocol in CoffeeKit
 ```swift
 @MainActor public protocol CaffeineThresholdDelegate: AnyObject {
@@ -233,6 +271,7 @@ extension Recaffeinater: @preconcurrency CaffeineThresholdDelegate {
 }
 ```
 
+Warns that preconcurrency is no longer needed.
 ###  26:50 - A new warning
 ```swift
 //warning: @preconcurrency attribute on conformance to 'CaffeineThresholdDelegate' has no effect
@@ -255,6 +294,15 @@ extension Recaffeinater: CaffeineThresholdDelegate {
     }
 }
 ```
+
+**Don't panic!!**
+
+1.  Resolve simple issues first
+2. Look for root causes to large numbers of issues
+3. Try with latest SDK
+
+Take your time!
+
 
 ###  29:56 - Global variables in CoffeeKit are marked as `var`
 ```swift
@@ -311,6 +359,9 @@ private let types: Set<HKSampleType> = [caffeineType]
 internal let miligrams = HKUnit.gramUnit(with: .milli)
 ```
 
+Lots of easy wins, a few hard issues to tackle.
+
+
 ###  30:38 - Warning 1: Sending arrays in `drinksUpdated()`
 ```swift
 // warning: Sending 'self.currentDrinks' risks causing data races
@@ -360,6 +411,9 @@ public struct Drink: Hashable, Codable {
 }
 ```
 
+Swift doesn't infer sendable for public types.  Must explicitly add conformances for public types.
+
+
 ###  33:29 - Mark `Drink` struct as Sendable
 ```swift
 // The record of a single drink.
@@ -374,6 +428,7 @@ public struct Drink: Hashable, Codable, Sendable {
 public let type: DrinkType?
 ```
 
+could use nonisolated unsafe for this.
 ###  34:28 - Using nonisolated(unsafe)
 ```swift
 nonisolated(unsafe) public let type: DrinkType?
@@ -391,6 +446,7 @@ public enum DrinkType: Int, CaseIterable, Identifiable, Codable, Sendable {
     //...
 }
 ```
+
 
 ###  36:35 - CoreLocation using AsyncSequence
 ```swift
@@ -412,6 +468,9 @@ do {
     //...
 }
 ```
+
+we need the older APIs because we need to support older deployment target.
+
 
 ###  38:10 - Create a CoffeeLocationDelegate
 ```swift
@@ -443,6 +502,11 @@ class CoffeeLocationDelegate: NSObject, CLLocationManagerDelegate {
     }
 }
 ```
+
+Note that we guarantee that the thread we're called on is the thread created from.  ex this is a dynamic requirement.
+
+Since we create it from the main actor, let's enforce that here.
+
 
 ###  39:32 - Put the CoffeeLocationDelegate on the main actor
 ```swift
@@ -489,6 +553,12 @@ nonisolated func locationManager(
 }
 ```
 
+# Wrap up
+* take your time
+* eliminate simple issues
+* refactor t improve code *after* swift 6 is enabled
+* see the migration guide for more examples
+[[Swift concurrency update a sample app]]
 # Resources
 * https://www.swift.org/migration/documentation/migrationguide/
 * https://developer.apple.com/documentation/Swift/updating-an-app-to-use-strict-concurrency
