@@ -1,5 +1,21 @@
 Join us on a tour of SwiftUI, Apple's declarative user interface framework. Learn essential concepts for building apps in SwiftUI, like views, state variables, and layout. Discover the breadth of APIs for building fully featured experiences and crafting unique custom components. Whether you're brand new to SwiftUI or an experienced developer, you'll learn how to take advantage of what SwiftUI has to offer when building great apps.
 
+Declarative user interface frameworks, sued to build apps across apple's platforms.  Brand new apps, and incremental adoption with existing apps.  SwiftUI is the right tool to use!
+
+* rich feature set
+* Rich interactivity
+* Requires less code
+* Incremental adoption
+
+# Fundamentals of views
+Which pet can do the best tricks?  Over the course of this video, I'll use swiftUI to track pets, tricks, and how they stack up.
+
+Important to everything you do in SwiftUI.  Every pixel you see is in some way defined by a view.
+
+* declarative
+* compositional
+* state-driven
+
 ###  2:30 - Declarative views
 ```swift
 Text("Whiskers")
@@ -144,6 +160,10 @@ struct Pet: Identifiable {
 }
 ```
 
+declarative vs imperative programming.
+
+Not mutually exclusive.  Focus on expected result.  Imperative is great when making a change to state.  SwiftUI embraces both.   ex button action handler is imperative.
+
 ###  4:24 - Declarative and imperative programming
 ```swift
 struct ContentView: View {
@@ -212,6 +232,13 @@ struct Pet: Identifiable {
 }
 ```
 
+views are descriptions of the current state, not long-lived object instances.
+
+Defined with struct,s not classes.  SwiftUI takes these and generates an efficient data structure.  Used to produce different outputs.
+
+
+Because views are declarative descriptions, breaking up one view doesn't hurt the performance of your app.  
+
 ###  5:33 - Layout container
 ```swift
 HStack {
@@ -278,6 +305,8 @@ struct Pet: Identifiable {
 }
 ```
 
+
+
 ###  6:23 - View modifiers
 ```swift
 struct ContentView: View {
@@ -332,6 +361,9 @@ struct Pet: Identifiable {
     }
 }
 ```
+
+
+
 
 ###  7:05 - Custom views: Intro
 ```swift
@@ -675,7 +707,6 @@ PetRowView(pet: model.pet(named: "Whiskers"))
 PetRowView(pet: model.pet(named: "Roofus"))
 PetRowView(pet: model.pet(named: "Bubbles"))
 ```
-
 ###  7:59 - List composition
 ```swift
 struct ContentView: View {
@@ -777,6 +808,13 @@ PetRowView(pet: pet)
         ShareLink(item: pet, preview: SharePreview("Pet", image: Image(pet.name)))
     }
 ```
+## state-driven
+
+When your view's state changes, we keep views up to date.
+
+As data changes, new view values are created and given to swiftUI.  My app now has a list of pets and their tricks.  The most important part of a pet competition is rewarding the ones with the best tricks.  
+
+
 
 ###  9:31 - View updates
 ```swift
@@ -824,6 +862,12 @@ struct Pet {
 }
 ```
 
+IN my app I created an `@Observable` Pet class.  SwiftUI creates dependencies to specific properties used.  Two other important ones are `@State` and `@Binding`.
+
+state - new internal source of data for a view.
+binding - two-way reference between state and some other view.
+
+
 ###  10:57 - State changes
 ```swift
 struct RatingView: View {
@@ -849,6 +893,13 @@ struct RatingView: View {
     }
 }
 ```
+
+
+Button's action is called when tapped.  Increments internal state of the view.  SwiftUI notices this change and calls body on rating view, returning a new text value.  Result is updated onscreen.  
+
+Customize transition.  In this case, usin ga numeric text content transition works perfectly.
+
+
 
 ###  11:51 - State changes: animation
 ```swift
@@ -910,6 +961,10 @@ struct RatingView: View {
     }
 }
 ```
+
+Here I combine multiple components.  Currently they each have their own state, with their own separate sources of truth..  But when rating view increments its own state, the other doesn't change.
+
+
 
 ###  12:22 - State changes: multiple state
 ```swift
@@ -996,6 +1051,21 @@ struct RatingView: View {
 }
 ```
 
+
+# Built-in capability
+
+Even higher starting point for building your app.  I've just begun on the app tracking pets/tricks.  SwiftUI automatically provides adaptivity:
+* dark mode
+* ax features
+* localization
+
+Exactly how a feature you're working on will feel.  
+
+Adaptivity.  Describe the purpose of the functionality as opposed to visual construction.  
+
+Buttons are an adaptive view.  action, label.
+
+
 ###  14:16 - Adaptive buttons
 ```swift
 Button("Reward", systemImage: "trophy")
@@ -1004,6 +1074,9 @@ Button("Reward", systemImage: "trophy")
 //    .buttonStyle(.borderedProminent)
 ```
 
+Swipe actions, menus, forms, etc.  
+
+
 ###  14:53 - Adaptive toggles
 ```swift
 Toggle("Nocturnal Mode", systemImage: "moon", isOn: $pet.isNocturnal)
@@ -1011,6 +1084,11 @@ Toggle("Nocturnal Mode", systemImage: "moon", isOn: $pet.isNocturnal)
 //    .toggleStyle(.checkbox)
 //    .toggleStyle(.button)
 ```
+
+In different contexts, they look different.  Taking advantage of composition to affect behavior and enable customization.  
+
+
+
 
 ###  15:19 - Searchable
 ```swift
@@ -1068,6 +1146,10 @@ struct PetListView: View {
 }
 ```
 
+customize with suggestions, scopes, tokens.
+
+
+
 ###  15:20 - Searchable: customization
 ```swift
 struct PetListView: View {
@@ -1112,6 +1194,11 @@ struct PetListView: View {
     }
 }
 ```
+
+
+Custom metal shaders directly to swiftUI views.  
+
+WindowGroup.  Content view to show onscreen.  Scenes can also be composed together.  On multi-windowed platforms, scenes provide different ways to adapt with your app's capabilities.
 
 ###  16:58 - App definition
 ```swift
@@ -1165,6 +1252,18 @@ struct ScoreboardWidgetView: View {
 }
 ```
 
+Widgets - homescreen and desktop, composed out of views.  
+
+# Across all platforms
+
+Our capabilities extend to every platform.  Any apple platform.  Multiplier on your efforts.  Once you have a user interface with swiftuI on one platform, you have an excellent start to building your app on other platforms.
+
+Idiomatic look and feel for any platforms.  Keyboard navigation, multiple windows, etc.  Same use of search suggestions results in a standard dropdown on macOS, and an overlay list on iOS.
+
+It is not write once and run everywhere.  it is **learn once, use anywhere**.  
+
+Hig describes components and platform considerations.  Navigation splitview is different on watchOS, etc.
+
 ###  19:37 - Digital Crown rotation
 ```swift
 ScoreCardStack(rating: $rating)
@@ -1173,6 +1272,35 @@ ScoreCardStack(rating: $rating)
     .digitalCrownRotation($rating, from: 0, through: 10)
     #endif
 ```
+
+Bring my app to visionOS, taking advantage of views from other platforms, volumetric content, etc.  Incremental in nature, doesn't require you to support multiple platforms, but a headstart for when you're ready.
+
+# SDK interoperability
+
+Comes with each platform's SDK.  Many other frameworks in the SDK.  As easy as dropping in another view or property into your app.  UIKit/AppKit are imperative, object oriented user interface frameworks.  Use different patterns for creating and updating views.  Longstanding, rich capabilities that swiftui builds on.
+
+Create a UIViewRepresentable/ NSViewRepresentable.  
+
+Or to embed in UIView, use HostingViewController.  Add to UIKit/AppKit view hierarchy.  
+
+Tools for building great apps.  No expectation that an app needs to be entirely swiftUI.  Every framework brings its own unique capabilities
+* swiftdata - persistent models.  Connect, query models from swiftui views.
+* swift charts - customizable charting framework.  Create gorgeous information visualizations.
+
+
+* less code
+* rich feature set
+* Incremental adoption
+
+# Next steps
+* get started in xcode
+* watch an introduction to swiftUI
+* follow along with tutorials
+* see docs
+
+
+
+
 
 
 

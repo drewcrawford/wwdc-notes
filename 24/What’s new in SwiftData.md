@@ -1,5 +1,8 @@
 SwiftData makes it easy to add persistence to your app with its expressive, declarative API. Learn about refinements to SwiftData, including compound uniqueness constraints, faster queries with #Index, queries in Xcode previews, and rich predicate expressions. Join us to explore how you can use all of these features to express richer models and improve performance in your app. To discover how to build a custom data store or use the history API in SwiftData, watch “Create a custom data store with SwiftData” and “Track model changes with SwiftData history”.
 
+# Adopt SwiftData
+
+
 ### SampleTrips models decorated with @Model - 1:32
 ```swift
 // Trip Models decorated with @Model
@@ -84,6 +87,10 @@ class BucketListItem {...}
 class LivingAccommodation {...}
 ```
 
+# Customize the schema
+
+
+
 ### Add unique constraints to avoid duplication - 3:08
 ```swift
 // Add unique constraints to avoid duplication
@@ -100,6 +107,14 @@ class Trip {
     var livingAccommodation: LivingAccommodation?
 }
 ```
+
+Define keypaths that represent the same data
+Collisions become updates
+
+Opt in to preserve values on deletion
+Works with custom data stores
+
+[[Track model changes with SwiftData history]]
 
 ### Add .preserveValueOnDeletion to capture unique columns - 3:36
 ```swift
@@ -120,6 +135,10 @@ class Trip {
     var livingAccommodation: LivingAccommodation?
 }
 ```
+
+
+# Tailor a container
+
 
 ### SampleTrips using modelContainer scene modifier - 4:35
 ```swift
@@ -155,6 +174,11 @@ struct TripsApp: App {
 }
 ```
 
+
+can also build your own modelcontainer instance separately.
+
+
+
 ### Add a model container to the app - 5:13
 ```swift
 // Add a model container to the app
@@ -180,6 +204,9 @@ struct TripsApp: App {
     }
 }
 ```
+
+
+
 
 ### Use your own custom data store - 5:59
 ```swift
@@ -207,6 +234,11 @@ struct TripsApp: App {
 }
 ```
 
+[[Create a custom data store with SwiftData]]
+
+can also create custom datastores with previews.
+
+
 ### Make preview data using traits - 6:58
 ```swift
 // Make preview data using traits
@@ -229,6 +261,7 @@ extension PreviewTrait where T == Preview.ViewTraits {
 }
 ```
 
+
 ### Use sample data in a preview - 8:15
 ```swift
 // Use sample data in a preview
@@ -248,10 +281,18 @@ struct ContentView: View {
 }
 ```
 
+Use `@Previewable` macro to improve queries.
+
+
 ### Create a preview query using @Previewable - 8:50
 ```swift
 // Insert code snippet.
 ```
+
+
+Create a query right in the preview declaration, and then we pass in the model values from there?
+# Optimize queries
+
 
 ### Create a predicate to find a Trip based on search text - 9:55
 ```swift
@@ -259,11 +300,17 @@ struct ContentView: View {
 let predicate = #Predicate<Trip> { searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText) }
 ```
 
+So we build a compound predicate to check against more properties.
+
 ### Create a Compound Predicate to find a Trip based on Search Text - 10:06
 ```swift
 // Create a Compound Predicate to find a Trip based on Search Text
 let predicate = #Predicate<Trip> { searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText) || $0.destination.localizedStandardContains(searchText) }
 ```
+
+New in IOS 18, we can use `#Expression` macro.  Express complex queries.  Not only true/false, but arbitrary types.
+
+Compose predicates.
 
 ### Build a predicate to find Trips with BucketListItems that are not in the plan - 10:46
 ```swift
@@ -282,6 +329,10 @@ let tripsWithUnplannedItems = #Predicate<Trip> { trip
 }
 ```
 
+Create a single (or compound) index for your model.  Additional metadata which SwifTdata generates and saves in the container.
+
+
+
 ### Add Index for commonly used KeyPaths or combination of KeyPaths - 12:41
 ```swift
 // Add Index for commonly used KeyPaths or combination of KeyPaths
@@ -299,6 +350,13 @@ class Trip {
     var livingAccommodation: LivingAccommodation
 }
 ```
+
+# Next steps
+* build your app's model layer
+* Avoid duplicate models with `#Unique`
+* Speed up queries with `#Index`
+* Track model changes with history
+* bring your own custom data store to swiftdata
 
 
 # REsources

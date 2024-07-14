@@ -2,6 +2,8 @@
 
 Discover how to create stunning visual effects in SwiftUI. Learn to build unique scroll effects, rich color treatments, and custom transitions. We'll also explore advanced graphic effects using Metal shaders and custom text rendering.
 
+# Scroll effects
+
 ###  Scroll view with pagination - 1:51
 ```swift
 ScrollView(.horizontal) {
@@ -16,6 +18,8 @@ ScrollView(.horizontal) {
 .scrollTargetBehavior(.paging)
 ```
 
+
+
 ###  Rotation effect - 3:30
 ```swift
 AnimalPhoto(image: animal)
@@ -28,6 +32,10 @@ AnimalPhoto(image: animal)
     }
 ```
 
+scrollTransition - change a standard collection of elements into something custom.  Exposes the content and phase.  Can use these values to change the rotation and offset based on scrollview.
+
+
+isIdentity - fully onscreen.
 ###  Parallax Effect - 3:14
 ```swift
 ScrollView(.horizontal) {
@@ -53,6 +61,9 @@ ScrollView(.horizontal) {
 .scrollTargetBehavior(.paging)
 ```
 
+Visual effect modifier.
+
+
 ###  Visual effect hue rotation - 4:41
 ```swift
 RoundedRectangle(cornerRadius: 24)
@@ -63,6 +74,25 @@ RoundedRectangle(cornerRadius: 24)
             
     })
 ```
+
+Change visual properties based on position/size in a performant way.
+
+Instead of changing the color, I could change other visual properties.  Here we take the same y position and use to offset, scale, fade, and blur, etc.
+
+It's not clear if an effect is right for your app or is distracting.  Live with your visual experiments.  Pleasant to use after the novelty has worn off.  Testing over time will help reinforce whether it's working.
+
+# Color treatments
+
+* linear
+* radial
+* angulary
+* brightness
+* hue
+* sat
+* blend modes, etc!
+New in swiftUI is support for mesh gradients.  Useful when you want a dynamic background or need to add visual distinction to a surface.  Made from a grid of points.  Each point has a color associated with it.
+
+SwiftUI interpolates to create a color fill.
 
 ###  Mesh gradient - 7:30
 ```swift
@@ -81,6 +111,18 @@ MeshGradient(
     ]
 )
 ```
+
+Define where the X and Y coordinates on this 3x3 grid are located.  Points in the grid are defined using simd2 float values.  Value from 0 to 1 on the x and y axis.
+
+Add colors for each points.
+
+Purely decorative.  Also use them to match a surface with imagery.  Signal that something has changed through animation.
+
+# View transitions
+Show movement, remove views, etc.  They can help provide context as to what changed and why.
+
+Sometimes these transitions are due to the tap of a button or drag of an element.  Sometimes they're triggered by someone else using the app.
+
 
 ###  Custom transition - 10:36
 ```swift
@@ -101,6 +143,10 @@ struct Twirl: Transition {
 }
 ```
 
+
+# Text transitions
+
+
 ###  The Minimum Viable TextRenderer - 13:29
 ```swift
 // The Minimum Viable TextRenderer
@@ -113,6 +159,31 @@ struct AppearanceEffectRenderer: TextRenderer {
     }
 }
 ```
+
+Customize how swiftui text is drawn for a full view tree.  Custom text drawing possibilities.  I'm excited about animation.
+
+[[Add rich graphics to your SwiftUI app]]
+
+Iterate over the individual lines and draw into context.  Default rendering behavior.
+
+1.  elapsedTime
+2. elementDuration
+3. totalDuration
+
+I implement `Animatable` property to have swiftui animate elapedTime for me.
+
+distribute time evenly by calculating the amount of delay between two lines.
+
+Enumerate all lines and calculate relative start time.  Time that has passed is the overall time minus the elapsed offset?
+
+Using the transaction body view modifier I can override the animation when appropriate.  e.g. linear pacing for every line.  Set my custom renderer on the view being rendered in or out.
+
+Let's try animating every glyph individually.  I need to iterate over text.layout.  Line is collection of runs, run is collection of run slices.  Therefore i need `layout.flattenedRunSlices`.
+
+What if I only want to animate certain words.  TextAttribute protocol.  I can pass data from my text to my text renderer.  
+
+I mark `VisualEffects` with a custom attribute.  I don't need to add any member variables.  Revisiting the draw method, I iterate over flattened runs and check for `EmphasisAttribute`.
+
 
 ###  A Custom Text Transition - 14:01
 ```swift
@@ -288,6 +359,18 @@ struct TextTransition: Transition {
     }
 }
 ```
+# Metal shaders
+
+Small programs that claculate various rendering effects directly on GPU.  SwiftUI uses these internally to implement many visual effects.
+
+Introduced in iOS 17 and aligned releases, unlock the same level of performance and write your own effects.
+
+Call a fucntion with its name on `ShaderLibrary`.  Pass additional parameters like colors, numbers, or image.  SwiftUI will call your shader function for every single pixel of your view.  That's a lot of pixels.  To make this possible, they run on GPU.
+
+* custom fills
+* color effects
+* distortion effects
+* layer effects - effectively a superset of the other two.
 
 ###  A simple ripple effect Metal shader - 22:55
 ```cpp
@@ -579,6 +662,19 @@ struct SpatialPressingGesture: UIGestureRecognizerRepresentable {
         }
 }
 ```
+Building great experiences requires trial and error.  Debug parameters is a great way to go.
+
+Makes it easier to quickly iterate.  Important because there are so many possibilities.
+
+use shaders to create an animated fill, combine shader and textrenderer, gradient maps, etc.
+
+# Next steps
+* experiment with custom scroll effects
+* create a fresh mesh gradient
+* treat your app to custom transitions
+* try the new text renderer api
+* build a wild new experience with a metal shader
+
 
 # Resources
 * [Creating visual effects with SwiftUI](https://developer.apple.com/documentation/SwiftUI/Creating-visual-effects-with-SwiftUI)

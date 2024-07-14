@@ -1,5 +1,7 @@
 Learn how you can use SwiftUI to build great apps for any Apple platform. Explore a fresh new look and feel for tabs and documents on iPadOS. Improve your window management with new windowing APIs, and gain more control over immersive spaces and volumes in your visionOS apps. We'll also take you through other exciting refinements that help you make expressive charts, customize and layout text, and so much more.
 
+# Fresh apps
+
 ### TabView - 1:38
 ```swift
 import SwiftUI
@@ -66,6 +68,11 @@ struct Party {
 
 #Preview { KaraokeTabView() }
 ```
+
+`sidebarAdaptable`.  Switch between tab bar and sidebar view.
+
+presentationSizing.  
+
 
 ### Presentation sizing - 2:28
 ```swift
@@ -146,6 +153,15 @@ struct Party: Identifiable {
 }
 ```
 
+[[Elevate your tab and sidebar experience in iPadOS]]
+
+[[Enhance your UI animations and transitions]]
+
+## controls
+
+controlcenter / lockscreen.  Can be activated by action button.  New kind of widget that are easy to build with app intents.
+
+
 ### Controls API - 3:18
 ```swift
 import WidgetKit
@@ -183,6 +199,9 @@ struct StartPartyIntent: AppIntent {
 }
 ```
 
+[[Extend your app’s controls across the system]]
+
+
 ### Function plotting - 3:49
 ```swift
 import SwiftUI
@@ -203,6 +222,10 @@ struct AttendanceView: View {
 
 #Preview { AttendanceView().padding(40) }
 ```
+
+[[Swift Charts Vectorized and function plots]]
+
+
 
 ### Dynamic table columns - 4:18
 ```swift
@@ -283,6 +306,8 @@ struct PartyData: Identifiable {
 #Preview { SongCountsTable().padding(40) }
 ```
 
+First-class support for colorful mesh gradients by interpolating between points on a grid of colors you can create a beautiful lattice.  Make our karaoke invites as snazzy as our parties!
+
 ### Mesh gradients - 4:42
 ```swift
 import SwiftUI
@@ -313,6 +338,9 @@ struct MyMesh: View {
 #Preview { MyMesh().statusBarHidden() }
 ```
 
+Built a document-based app for editing the words to our favorite songs.  Express my app's individuality and highlight its features using document launch scene type.
+
+
 ### Document launch scene - 5:14
 ```swift
 DocumentGroupLaunchScene("Your Lyrics") {
@@ -334,6 +362,23 @@ overlayAccessoryView: { geometry in
 }
 ```
 
+[[Evolve your document launch experience]]
+
+SF symbol effects.  
+
+Adopt 3 new animation presets for SF symbols
+* wiggle -> oscillates in any direction or angle
+* breathe -> smoothly scales a symbol up and down to indicate ongoing activity
+* rotate -> spins some parts of a symbol around a designated anchor point
+* replace -> now magic replace behavior.  Symbols smoothly animate badges and slashes.
+
+[[What’s new in SF Symbols 6]]
+# Harnessing the platform
+
+With improved windowing, more control over input.  Take advantage of whatever platform we're on.  Tailor style and behavior of windows on macOS.  In my lyric editor, I have a window that shows a single line preview.
+
+
+
 ### Window styling and default placement - 7:04
 ```swift
 Window("Lyric Preview", id: "lyricPreview") {
@@ -348,12 +393,18 @@ Window("Lyric Preview", id: "lyricPreview") {
 }
 ```
 
+
 ### Window Drag Gesture - 7:30
 ```swift
 Text(currentLyric)
     .background(.thinMaterial, in: .capsule)
     .gesture(WindowDragGesture())
 ```
+
+[[Tailor macOS windows with SwiftUI]]
+
+Push window can be used to open a window and hide the originating window.
+
 
 ### Push window environment action - 8:18
 ```swift
@@ -367,6 +418,11 @@ struct EditorView: View {
     }
 }
 ```
+
+[[Work with windows in SwiftUI]]
+
+## input methods
+
 
 ### Hover effects - 8:47
 ```swift
@@ -383,6 +439,11 @@ struct ProfileButtonStyle: ButtonStyle {
 }
 ```
 
+[[Create custom hover effects in visionOS]]
+
+Keyboard support.  In main menu on macOS I can open my preview window.  I've added the new
+
+
 ### Modifier key alternates - 9:14
 ```swift
 Button("Preview Lyrics in Window") {
@@ -395,6 +456,9 @@ Button("Preview Lyrics in Window") {
 }
 .keyboardShortcut("p", modifiers: [.shift, .command])
 ```
+
+For low-level control, any view can respond to modifier key changes.  `.onModifierKeyschanged`.  Implement an extra alignment guide, etc.
+
 
 ### Responding to modifier keys - 9:32
 ```swift
@@ -409,6 +473,7 @@ var body: some View {
 }
 ```
 
+
 ### Pointer customization - 9:55
 ```swift
 ForEach(resizeAnchors) { anchor in
@@ -416,6 +481,8 @@ ForEach(resizeAnchors) { anchor in
         .pointerStyle(.frameResize(position: anchor.position))
 }
 ```
+
+New in iPadOS 17.5, we added support for apple pencil pro, such as doubletap and squeeze.
 
 ### Pencil squeeze gesture - 10:23
 ```swift
@@ -434,6 +501,24 @@ var body: some View {
 }
 ```
 
+[[Squeeze the most out of Apple Pencil]]
+
+Now that live activities have also come to watchOS, your live activities will automatically show up on apple watch without any work on your part.
+
+`smallSupplementalActivityFamily`.  `handGestureShortcut` modifier.
+
+Text now has additional formats for the display of live times and dates.  Date references, date offsets, and timers.  Each format is deeply customizable down to its components.  Even adapt to the size of its container.
+
+Widgets are smarter.  Specify relevant contexts in places like smart stacks.  
+
+
+# Framework foundations
+
+We've added new api for working with frameworks work easier than ever.
+
+## custom containers
+
+Can create your own custom containers.  `ForEach(subviewOf:)` lets you loop over things.
 ### Custom containers - 13:13
 ```swift
 struct DisplayBoard<Content: View>: View {
@@ -464,6 +549,8 @@ DisplayBoard {
 }
 ```
 
+[[Demystify SwiftUI containers]]
+
 ### Custom containers with sectioning - 13:35
 ```swift
 DisplayBoard {
@@ -481,6 +568,8 @@ DisplayBoard {
     }
 }
 ```
+
+## ease of use
 
 ### Entry macro - 13:52
 ```swift
@@ -501,6 +590,9 @@ extension ContainerValues {
 }
 ```
 
+Doesn't just work with environment values.  Can also be used for FocusValues, Transaction, and container values.
+
+
 ### Default accessibility label augmentation - 14:12
 ```swift
 SongView(song)
@@ -513,6 +605,11 @@ SongView(song)
     }
 ```
 
+Add more AX info.  
+
+[[Catch up on accessibility in SwiftUI]]
+
+
 ### Previewable - 14:52
 ```swift
 #Preview {
@@ -520,6 +617,13 @@ SongView(song)
     Toggle("Show All songs", isOn: $showAllSongs)
 }
 ```
+
+New dynamic linking architecture.  Easier to set up Previews too.  Can use state directly in previews.  
+
+New ways to work with text and manage selection.  Text selection within text editing controls.  contents of my selection binding update to match selected text.  Read properties such as ranges.  Use this to show suggested rhymes for words in the inspector.
+
+Programmatically drive focused state.
+
 
 ### Programatic text selection - 15:06
 ```swift
@@ -576,12 +680,20 @@ TextField("Line \(line.number)", text: $line.text)
     }
 ```
 
+Add text suggestions to any text field.  use this to provide suggestions for how to finish a line.  Appear as a dropdown menu.  My text field updates with selected completion.
+
+Can now beautifully mix colors together!
+
+
+
 ### Color mixing - 15:59
 ```swift
 Color.red.mix(with: .purple, by: 0.2)
 Color.red.mix(with: .purple, by: 0.5)
 Color.red.mix(with: .purple, by: 0.8)
 ```
+
+Can now precompile shaders before first use.
 
 ### Custom shaders - 16:13
 ```swift
@@ -591,6 +703,15 @@ ContentView()
         try! await slimShader.compile(as: .layerEffect)
     }
 ```
+
+
+
+
+## scrolling enhancements
+
+`onScrollGeometryChange` for content offset, size, and more.
+
+
 
 ### React to scroll geometry changes - 16:23
 ```swift
@@ -610,6 +731,10 @@ struct ContentView: View {
 }
 ```
 
+Detect when a view's visibility has changed due to scrolling.
+
+
+
 ### React to scroll visibility changes - 16:42
 ```swift
 struct AutoPlayingVideo: View {
@@ -627,6 +752,9 @@ struct AutoPlayingVideo: View {
     }
 }
 ```
+
+More scroll positions to programmatically scroll to, such as the top edge.  
+
 
 ### New scroll positions - 16:54
 ```swift
@@ -646,6 +774,25 @@ struct ContentView: View {
     }
 }
 ```
+
+
+
+## swift 6 language mode support
+
+Views in SwiftUI have always been evaluated on the main actor.  And View is now marked on `@MainActor` annotation.  So all types are implicitly isolated by default.  Can now remove `@MainActor` annotation.
+
+Opt-in.  Take advantage when you're ready.
+
+[[Migrate your app to Swift 6]]
+
+
+## improved interop
+
+Can now use GR in swiftui view hierarchy.  And the other direction as well.  Take advantage of the power of swiftui animations.
+
+Use in-process swiftui animations.  Velocity is automatically preserved for gesture-driven animations.  UI and NSViewRepresentable context provide new apis for bridging animations.
+
+[[Enhance your UI animations and transitions]]
 
 ### Gesture interoperability - 18:17
 ```swift
@@ -699,6 +846,9 @@ struct BeadBoxWrapper: UIViewRepresentable {
     }
 }
 ```
+# Crafting experiences
+
+New apis for working with volumes, immersive spaces, etc.
 
 ### Volume baseplate visibility - 19:59
 ```swift
@@ -713,6 +863,8 @@ struct KaraokePracticeApp: App {
     }
 }
 ```
+
+
 
 ### React to volume viewpoint changes - 20:15
 ```swift
@@ -730,6 +882,8 @@ struct MicrophoneView: View {
 }
 ```
 
+Called any time I move to a *new side of the volume*.
+
 ### Control allowed immersion levels - 20:38
 ```swift
 struct KaraokeApp: App {
@@ -744,6 +898,10 @@ struct KaraokeApp: App {
 }
 ```
 
+Apply effects to the passthrough video.  Use preferredSurroundingsEffect.  Or to make our experience special, use colorMultiply.  
+
+
+
 ### Preferred surrounding effects - 21:00
 ```swift
 struct LoungeView: View {
@@ -753,6 +911,14 @@ struct LoungeView: View {
     }
 }
 ```
+
+For more, ornaments, supported viewpoints, world alignment, see [[Dive deep into volumes and immersive spaces]]
+
+Can now extend SwiftUI textviews with custom rendering fx and interaction behaviors.
+
+Creates a copy of the text which is blurred and has a tint.  By applying this highlight effect to only certain words, I can make some truly incredible effects.
+
+To learn about these text x, check out [[Create custom visual effects with SwiftUI]]
 
 ### Custom text renderers - 21:33
 ```swift
@@ -779,5 +945,12 @@ struct LyricsView: View {
 
 #Preview { LyricsView() }
 ```
+
+# Next steps
+* Refresh your apps
+* Add windowing and input capabilities
+* Bring live activities to watchOS
+
+
 # Resources
 https://developer.apple.com/documentation/Updates/SwiftUI
